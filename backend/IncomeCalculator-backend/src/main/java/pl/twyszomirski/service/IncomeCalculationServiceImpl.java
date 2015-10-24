@@ -3,7 +3,7 @@ package pl.twyszomirski.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.twyszomirski.domain.Country;
-import pl.twyszomirski.dto.IncomeCalculationDto;
+import pl.twyszomirski.dto.IncomeCalculationResponseDto;
 
 import java.util.Date;
 
@@ -24,7 +24,7 @@ public class IncomeCalculationServiceImpl implements IncomeCalculationService {
     private CountryService countryService;
 
     @Override
-    public IncomeCalculationDto calculateIncome(Float dailyRate, String countryCode) throws NoExchangeRateException{
+    public IncomeCalculationResponseDto calculateIncome(Float dailyRate, String countryCode) throws NoExchangeRateException{
         String dateIdentifier = exchangeRateService.getDateToken(new Date());
         Country country = lookupCountry(countryCode);
         if(country == null){
@@ -36,7 +36,7 @@ public class IncomeCalculationServiceImpl implements IncomeCalculationService {
             //just to be on the safe side
             throw new NoExchangeRateException();
         }
-        IncomeCalculationDto result = new IncomeCalculationDto();
+        IncomeCalculationResponseDto result = new IncomeCalculationResponseDto();
         result.setMonthlyRate(NUMBER_OF_DAYS_IN_MONTH* (dailyRate*exchangeRate));
         result.setAdditionalCost(country.getAdditionalCost());
         result.setMonthlyTax(result.getMonthlyRate()* country.getTaxRate());

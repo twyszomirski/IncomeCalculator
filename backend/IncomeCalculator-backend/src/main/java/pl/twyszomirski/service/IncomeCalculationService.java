@@ -1,11 +1,11 @@
 package pl.twyszomirski.service;
 
-import pl.twyszomirski.dto.IncomeCalculationDto;
+import pl.twyszomirski.dto.IncomeCalculationResponseDto;
 
 /**
  * Created by Tomasz
  */
 public interface IncomeCalculationService {
 
-    IncomeCalculationDto calculateIncome(Float dailyRate, String countryCode) throws NoExchangeRateException;
+    IncomeCalculationResponseDto calculateIncome(Float dailyRate, String countryCode) throws NoExchangeRateException;
 }

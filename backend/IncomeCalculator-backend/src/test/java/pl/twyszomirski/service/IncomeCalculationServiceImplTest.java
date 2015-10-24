@@ -6,7 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import pl.twyszomirski.domain.Country;
-import pl.twyszomirski.dto.IncomeCalculationDto;
+import pl.twyszomirski.dto.IncomeCalculationResponseDto;
+import pl.twyszomirski.util.EntityUtils;
 
 import java.util.Date;
 
@@ -34,18 +35,22 @@ public class IncomeCalculationServiceImplTest {
 
     @Test
     public void testCalculateIncomeOK() throws Exception {
-        when(countryService.getByCountryCode(anyString())).thenReturn(createCountry());
+        when(countryService.getByCountryCode(anyString())).thenReturn(
+                EntityUtils.buildCountry("US","USD", "USA", 0.19f,10L));
         when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
         when(exchangeRateService.getExchangeRate("USD", "PLN", "01012015")).thenReturn(2.0f);
 
-        IncomeCalculationDto result = service.calculateIncome(15f,"US");
+        IncomeCalculationResponseDto result = service.calculateIncome(15f,"US");
 
         assertThat(result.getMonthlyRate(),is(660f));
+        assertThat(result.getMonthlyTax(),is(125.4f));
+        assertThat(result.getAdditionalCost(),is(10L));
     }
 
     @Test(expected = NoExchangeRateException.class)
     public void testCalculateIncomePassesException() throws Exception {
-        when(countryService.getByCountryCode(anyString())).thenReturn(createCountry());
+        when(countryService.getByCountryCode(anyString())).thenReturn(
+                EntityUtils.buildCountry("US","USD", "USA", 0.19f,10L));
         when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
         when(exchangeRateService.getExchangeRate("USD","PLN", "01012015")).thenThrow(new NoExchangeRateException());
 
@@ -54,7 +59,8 @@ public class IncomeCalculationServiceImplTest {
 
     @Test(expected = NoExchangeRateException.class)
     public void testCalculateIncomeNullRate() throws Exception {
-        when(countryService.getByCountryCode(anyString())).thenReturn(createCountry());
+        when(countryService.getByCountryCode(anyString())).thenReturn(
+                EntityUtils.buildCountry("US","USD", "USA", 0.19f,10L));
         when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
         when(exchangeRateService.getExchangeRate("USD","PLN", "01012015")).thenReturn(null);
 
@@ -64,14 +70,5 @@ public class IncomeCalculationServiceImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void testCalculateIncomeNullCountry() throws Exception {
         service.calculateIncome(15f, "US");
-    }
-
-    private Country createCountry(){
-        Country country = new Country();
-        country.setAdditionalCost(10L);
-        country.setCurrencyCode("USD");
-        country.setName("USA");
-        country.setTaxRate(0.19f);
-        return country;
     }
 }

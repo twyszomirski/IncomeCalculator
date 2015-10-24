@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.twyszomirski.domain.Country;
-import pl.twyszomirski.dto.IncomeCalculationDto;
+import pl.twyszomirski.dto.IncomeCalculationRequestDto;
+import pl.twyszomirski.dto.IncomeCalculationResponseDto;
 import pl.twyszomirski.service.IncomeCalculationService;
 import pl.twyszomirski.service.NoExchangeRateException;
 
@@ -20,7 +21,8 @@ public class IncomeCalculationController {
     private IncomeCalculationService incomeCalculationService;
 
     @RequestMapping(value = "/incomeCalculations", method = RequestMethod.POST)
-    IncomeCalculationDto findAllCountries(@RequestBody IncomeCalculationDto incomeCalculationDto) throws NoExchangeRateException {
-        return incomeCalculationService.calculateIncome(incomeCalculationDto.getDailyRate(),"jdasd");
+    IncomeCalculationResponseDto calculateIncome(@RequestBody IncomeCalculationRequestDto incomeCalculationDto) throws NoExchangeRateException {
+        //TODO: add error translation here
+        return incomeCalculationService.calculateIncome(incomeCalculationDto.getDailyRate(),incomeCalculationDto.getCountryCode());
     }
 }

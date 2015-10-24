@@ -3,31 +3,11 @@ package pl.twyszomirski.dto;
 /**
  * Created by Tomasz
  */
-public class IncomeCalculationDto {
+public class IncomeCalculationResponseDto {
 
-    //TODO: separete this into two dtos
-
-    Float dailyRate;
-    String currencyCode;
     Float monthlyRate;
     Float monthlyTax;
     Long additionalCost;
-
-    public Float getDailyRate() {
-        return dailyRate;
-    }
-
-    public void setDailyRate(Float dailyRate) {
-        this.dailyRate = dailyRate;
-    }
-
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
-    }
 
     public Float getMonthlyRate() {
         return monthlyRate;
@@ -51,5 +31,14 @@ public class IncomeCalculationDto {
 
     public void setAdditionalCost(Long additionalCost) {
         this.additionalCost = additionalCost;
+    }
+
+    @Override
+    public String toString() {
+        return "IncomeCalculationResponseDto{" +
+                "monthlyRate=" + monthlyRate +
+                ", monthlyTax=" + monthlyTax +
+                ", additionalCost=" + additionalCost +
+                '}';
     }
 }
