@@ -4,3 +4,10 @@ target
 *.war
 .idea
 *.iml
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+.DS_Store
+
