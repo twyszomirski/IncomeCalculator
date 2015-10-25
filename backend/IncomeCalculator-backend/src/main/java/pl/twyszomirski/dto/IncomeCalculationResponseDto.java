@@ -7,7 +7,7 @@ public class IncomeCalculationResponseDto {
 
     Float monthlyRate;
     Float monthlyTax;
-    Long additionalCost;
+    Float additionalCost;
 
     public Float getMonthlyRate() {
         return monthlyRate;
@@ -25,11 +25,11 @@ public class IncomeCalculationResponseDto {
         this.monthlyTax = monthlyTax;
     }
 
-    public Long getAdditionalCost() {
+    public Float getAdditionalCost() {
         return additionalCost;
     }
 
-    public void setAdditionalCost(Long additionalCost) {
+    public void setAdditionalCost(Float additionalCost) {
         this.additionalCost = additionalCost;
     }
 

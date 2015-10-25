@@ -1,11 +1,15 @@
 package pl.twyszomirski.dto;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Tomasz
  */
 public class IncomeCalculationRequestDto {
 
+    @NotNull
     Float dailyRate;
+    @NotNull
     String countryCode;
 
     public Float getDailyRate() {

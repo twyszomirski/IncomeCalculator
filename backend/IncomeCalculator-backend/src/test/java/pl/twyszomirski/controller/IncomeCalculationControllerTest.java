@@ -54,7 +54,7 @@ public class IncomeCalculationControllerTest {
         incomeCalculationRequestDtoPL.setCountryCode("PL");
 
         IncomeCalculationResponseDto incomeCalculationResponseDtoPL = new IncomeCalculationResponseDto();
-        incomeCalculationResponseDtoPL.setAdditionalCost(11L);
+        incomeCalculationResponseDtoPL.setAdditionalCost(11f);
         incomeCalculationResponseDtoPL.setMonthlyRate(19f);
         incomeCalculationResponseDtoPL.setMonthlyTax(15.5f);
         when(incomeCalculationService.calculateIncome(1.0f, "PL")).thenReturn(incomeCalculationResponseDtoPL);
@@ -62,7 +62,7 @@ public class IncomeCalculationControllerTest {
         mockMvc.perform(post("/incomeCalculations").content(TestUtils.asJsonString(incomeCalculationRequestDtoPL))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect( jsonPath("$.additionalCost", is(11)))
+                .andExpect( jsonPath("$.additionalCost", is(11.0)))
                 .andExpect( jsonPath("$.monthlyRate", is(19.0)))
                 .andExpect( jsonPath("$.monthlyTax", is(15.5)));
 
@@ -71,7 +71,7 @@ public class IncomeCalculationControllerTest {
         incomeCalculationRequestDtoDE.setCountryCode("DE");
 
         IncomeCalculationResponseDto incomeCalculationResponseDtoDE = new IncomeCalculationResponseDto();
-        incomeCalculationResponseDtoDE.setAdditionalCost(111L);
+        incomeCalculationResponseDtoDE.setAdditionalCost(111f);
         incomeCalculationResponseDtoDE.setMonthlyRate(119f);
         incomeCalculationResponseDtoDE.setMonthlyTax(115.5f);
         when(incomeCalculationService.calculateIncome(2.0f, "DE")).thenReturn(incomeCalculationResponseDtoDE);
@@ -79,7 +79,7 @@ public class IncomeCalculationControllerTest {
         mockMvc.perform(post("/incomeCalculations").content(TestUtils.asJsonString(incomeCalculationRequestDtoDE))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect( jsonPath("$.additionalCost", is(111)))
+                .andExpect( jsonPath("$.additionalCost", is(111.0)))
                 .andExpect( jsonPath("$.monthlyRate", is(119.0)))
                 .andExpect( jsonPath("$.monthlyTax", is(115.5)));
 

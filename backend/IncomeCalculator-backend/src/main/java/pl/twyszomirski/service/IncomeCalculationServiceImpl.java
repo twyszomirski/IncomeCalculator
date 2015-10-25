@@ -31,15 +31,18 @@ public class IncomeCalculationServiceImpl implements IncomeCalculationService {
             throw new IllegalArgumentException("Can't find country for code: " + countryCode);
         }
 
-        Float exchangeRate =  exchangeRateService.getExchangeRate(country.getCurrencyCode(),CURRENCY_CODE_PL,dateIdentifier);
+        Float exchangeRate =  exchangeRateService.getExchangeRate(CURRENCY_CODE_PL,country.getCurrencyCode(),dateIdentifier);
         if(exchangeRate == null){
             //just to be on the safe side
             throw new NoExchangeRateException();
         }
         IncomeCalculationResponseDto result = new IncomeCalculationResponseDto();
-        result.setMonthlyRate(NUMBER_OF_DAYS_IN_MONTH* (dailyRate*exchangeRate));
-        result.setAdditionalCost(country.getAdditionalCost());
-        result.setMonthlyTax(result.getMonthlyRate()* country.getTaxRate());
+        Float monthlyRateGross = NUMBER_OF_DAYS_IN_MONTH* (dailyRate*exchangeRate);
+        Float monthlyTax = monthlyRateGross * country.getTaxRate();
+        Float monthlyRateNet = monthlyRateGross - monthlyTax;
+        result.setMonthlyRate(monthlyRateNet);
+        result.setMonthlyTax(monthlyTax);
+        result.setAdditionalCost(country.getAdditionalCost() * exchangeRate);
         return result;
     }
 
