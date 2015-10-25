@@ -5,5 +5,11 @@ package pl.twyszomirski.service;
  */
 public class NoExchangeRateException extends Exception{
 
-    //TODO: make this exception carry some information
+    public NoExchangeRateException(){
+        super();
+    }
+
+    public NoExchangeRateException(Throwable cause){
+        super(cause);
+    }
 }

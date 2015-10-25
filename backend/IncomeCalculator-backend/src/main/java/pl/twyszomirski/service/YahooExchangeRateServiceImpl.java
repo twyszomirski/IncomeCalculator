@@ -1,5 +1,7 @@
 package pl.twyszomirski.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import java.util.Date;
 @Service
 public class YahooExchangeRateServiceImpl implements ExchangeRateService{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(YahooExchangeRateServiceImpl.class);
+
     private static final String DATE_IDENTIFIER_DATE_FORMAT="ddMMyyyy";
 
     private static final String TO_CURRENCY_PLACE_HOLDER = "__TO_CURRENCY__";
@@ -26,15 +30,17 @@ public class YahooExchangeRateServiceImpl implements ExchangeRateService{
             FROM_CURRENCY_PLACE_HOLDER+ "\")&env=store://datatables.org/alltableswithkeys";
 
     @Override
-    @Cacheable
-    public Float getExchangeRate(String fromCode, String ToCode, String dateIdentifier) throws NoExchangeRateException{
+    @Cacheable("exchangeRates")
+    public Float getExchangeRate(String fromCode, String toCode, String dateIdentifier) throws NoExchangeRateException{
+
+        LOGGER.debug("Calling getExchangeRate with parameters {}, {}, {}", fromCode, toCode, dateIdentifier);
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<?> request = new HttpEntity<Object>(headers);
 
-        String url= EXCHANGE_RATE_SERVICE_URL.replaceAll(FROM_CURRENCY_PLACE_HOLDER, fromCode).replaceAll(TO_CURRENCY_PLACE_HOLDER, ToCode);
+        String url= EXCHANGE_RATE_SERVICE_URL.replaceAll(FROM_CURRENCY_PLACE_HOLDER, fromCode).replaceAll(TO_CURRENCY_PLACE_HOLDER, toCode);
 
         Float result = null;
         try {
@@ -42,8 +48,8 @@ public class YahooExchangeRateServiceImpl implements ExchangeRateService{
             result = Float.parseFloat(response.getBody().getQuery().getResults().getRate().getRate());
         }
         catch(Exception e){
-            //TODO: maybe tell something more about what happend
-            throw new NoExchangeRateException();
+            LOGGER.error("The damn yahoo finance service failed",e);
+            throw new NoExchangeRateException(e);
         }
         return result;
     }
