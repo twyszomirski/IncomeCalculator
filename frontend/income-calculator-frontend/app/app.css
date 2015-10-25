@@ -1,0 +1,9 @@
+.main-content{
+margin: 0 auto;
+    max-width: 450px;
+    padding: 15px;
+}
+
+div .inline{
+display: inline;	
+}

@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -25,43 +26,68 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<h1>PRZELICZNIK KONTRAKTORA</h1>
 
-<p> Aplikacja ma za zadanie .....</p>
+<div class="container main-content" ng-controller="CalculationCtrl">
+    <h1>PRZELICZNIK KONTRAKTORA</h1>
 
-<div ng-controller="CalculationCtrl">
-    <form novalidate>
+    <p> Aplikacja ma za zadanie wyliczy&#263; miesi&#281;czny zarobek netto w PLN na kontrakcie w Niemczech, Wielkiej
+        Brytanii i Polsce</p>
 
-        <h3> 1. Wybierz kraj </h3>
+    <form role="form" novalidate>
 
-        <div data-ng-repeat="country in countries">
-            <label>
-                <input type="radio" name="country" data-ng-model="formData.selectedCountry"
-                       ng-change="updateCalculation()" data-ng-value="country"/>
-                {{country.name}}
+        <div class="choice-panel well">
+            <h3> 1. Wybierz kraj </h3>
 
-            </label>
+            <div data-ng-repeat="country in countries">
+                <label>
+                    <input type="radio" name="country" ng-model="formData.selectedCountry"
+                           ng-change="updateCalculation()" ng-value="country"/>
+                    {{country.name}}
+
+                </label>
+            </div>
+            <h3>2. Wpisz stawk&#281; dzienn&#261;</h3>
+
+            <div class="input-group">
+                <input class="form-control" type="number" ng-model="formData.dailyRate" ng-change="updateCalculation()"
+                       placeholder="Kwota netto"/>
+
+                <div class="input-group-addon">{{formData.selectedCountry.currencyCode}}</div>
+            </div>
         </div>
-        <h3>Wprowadz kwote</h3>
-        <input type="number" ng-model="formData.dailyRate" ng-change="updateCalculation()"/>
-        {{formData.selectedCountry.currencyCode}}
 
-        <div>
+        <div class="result-panel well text-center">
             <h1> WYNIK </h1>
 
             <div>
-                <p>Stawka miesiaczna netto</p>
-                {{formData.monthlyRate}}
-            </div>
+                <p>Stawka miesi&#281;czna netto</p>
 
-            <div>
-                <p>Podatek dochodowy ({{formData.selectedCountry.taxRate * 100}}%)</p>
-                {{formData.monthlyTax}}
+                <h1>{{formData.monthlyRate}}
+                    <div class="inline" ng-hide="formData.monthlyRate == null">
+                        PLN
+                    </div>
+                </h1>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Podatek dochodowy ({{formData.selectedCountry.taxRate * 100}}%)</p>
 
-            <div>
-                <p>Koszt Staly</p>
-                {{formData.additionalCost}}
+                    <h1>{{formData.monthlyTax}}
+                        <div class="inline" ng-hide="formData.monthlyTax == null">
+                            PLN
+                        </div>
+                    </h1>
+                </div>
+
+                <div class="col-md-6">
+                    <p>Koszt Sta&#322;y</p>
+
+                    <h1>{{formData.additionalCost}}
+                        <div class="inline" ng-hide="formData.additionalCost == null">
+                            PLN
+                        </div>
+                    </h1>
+                </div>
             </div>
 
         </div>
