@@ -21,10 +21,11 @@ angular.module('incomeCalculator', ['ngResource'])
                 $scope.resetCalculation();
                 return;
             }
-            IncomeCalculation.calculate(
+            
+			IncomeCalculation.get(
                 {
-                    dailyRate: $scope.formData.dailyRate,
-                    countryCode: $scope.formData.selectedCountry.countryCode
+                    daily_rate: $scope.formData.dailyRate,
+                    country_code: $scope.formData.selectedCountry.countryCode
                 },
                 function (data) {
                     $scope.formData.monthlyRate = data.monthlyRate
@@ -49,7 +50,6 @@ angular.module('incomeCalculator', ['ngResource'])
     })
 
     .factory("IncomeCalculation", function ($resource) {
-        return $resource("http://localhost:9000/incomeCalculations", {},
-            {calculate: {method: 'POST', isArray: false}});
+        return $resource("http://localhost:9000/income-calculations");
     });
 

@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.twyszomirski.domain.Country;
-import pl.twyszomirski.dto.IncomeCalculationRequestDto;
 import pl.twyszomirski.dto.IncomeCalculationResponseDto;
 import pl.twyszomirski.service.IncomeCalculationService;
 import pl.twyszomirski.service.NoExchangeRateException;
+
+import java.math.BigDecimal;
 
 /**
  * Created by Tomasz
@@ -19,8 +20,8 @@ public class IncomeCalculationController {
     @Autowired
     private IncomeCalculationService incomeCalculationService;
 
-    @RequestMapping(value = "/incomeCalculations", method = RequestMethod.POST)
-    IncomeCalculationResponseDto calculateIncome(@RequestBody @Validated IncomeCalculationRequestDto incomeCalculationDto) throws NoExchangeRateException {
-        return incomeCalculationService.calculateIncome(incomeCalculationDto.getDailyRate(),incomeCalculationDto.getCountryCode());
+    @RequestMapping(value = "/income-calculations", method = RequestMethod.GET)
+    IncomeCalculationResponseDto calculateIncome(@RequestParam("daily_rate") BigDecimal dailyRate, @RequestParam("country_code")  String countryCode) throws NoExchangeRateException {
+        return incomeCalculationService.calculateIncome(dailyRate, countryCode);
     }
 }

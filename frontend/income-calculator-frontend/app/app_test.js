@@ -27,7 +27,7 @@ describe('incomeCalculator module', function () {
             var scope = $rootScope.$new();
             var mockedHttp = _$httpBackend_;
             mockedHttp.expectGET('http://localhost:9000/countries').respond([{name: 'Poland'}, {name: 'Boland'}]);
-            mockedHttp.expectPOST('http://localhost:9000/incomeCalculations').respond({
+            mockedHttp.expectGET('http://localhost:9000/income-calculations?country_code=PL&daily_rate=1').respond({
                 monthlyRate: 1.0,
                 monthlyTax: 2.0,
                 additionalCost: 3
