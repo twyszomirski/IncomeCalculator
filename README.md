@@ -7,10 +7,10 @@ A SPA application for calculating income for a contractor. Web part in AngularJS
 The project is separated into two modules: frontend and backend. Modules live in their respective folders. 
 
 ## Runing backend 
-You need to go to the backend folder [backend\IncomeCalculator-backend] and run it with maven:
+You need to go to the backend folder [backend\income-calculator-backend] and run it with maven:
 
 ```
-cd backend\IncomeCalculator-backend
+cd backend\income-calculator-backend
 ```
 
 ```
