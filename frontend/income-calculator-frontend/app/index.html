@@ -10,14 +10,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My AngularJS App</title>
-    <meta name="description" content="">
+    <title>Income Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="app.css">
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
 
@@ -62,7 +58,7 @@
             <div>
                 <p>Stawka miesi&#281;czna netto</p>
 
-                <h1>{{formData.monthlyRate}}
+                <h1>{{formData.monthlyRate | number : 2}}
                     <div class="inline" ng-hide="formData.monthlyRate == null">
                         PLN
                     </div>
@@ -72,7 +68,7 @@
                 <div class="col-md-6">
                     <p>Podatek dochodowy ({{formData.selectedCountry.taxRate * 100}}%)</p>
 
-                    <h1>{{formData.monthlyTax}}
+                    <h1>{{formData.monthlyTax | number : 2}}
                         <div class="inline" ng-hide="formData.monthlyTax == null">
                             PLN
                         </div>
@@ -82,7 +78,7 @@
                 <div class="col-md-6">
                     <p>Koszt Sta&#322;y</p>
 
-                    <h1>{{formData.additionalCost}}
+                    <h1>{{formData.additionalCost | number : 2}}
                         <div class="inline" ng-hide="formData.additionalCost == null">
                             PLN
                         </div>
