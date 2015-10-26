@@ -36,9 +36,9 @@ describe('incomeCalculator module', function () {
             scope.formData.dailyRate = 1.0;
             scope.formData.selectedCountry = {countryCode: 'PL'};
 
-            expect(scope.formData.monthlyRate).toBeUndefined();
-            expect(scope.formData.monthlyTax).toBeUndefined();
-            expect(scope.formData.additionalCost).toBeUndefined();
+            expect(scope.formData.monthlyRate).toEqual(0);
+            expect(scope.formData.monthlyTax).toEqual(0);
+            expect(scope.formData.additionalCost).toEqual(0);
 
             scope.updateCalculation();
             mockedHttp.flush();

@@ -8,6 +8,7 @@ angular.module('incomeCalculator', ['ngResource'])
 
     .controller('CalculationCtrl', function ($scope, Country, IncomeCalculation) {
         $scope.formData = {};
+
         Country.query(function (data) {
             $scope.countries = data;
             if ($scope.countries.length > 0) {
@@ -16,6 +17,10 @@ angular.module('incomeCalculator', ['ngResource'])
         });
 
         $scope.updateCalculation = function () {
+            if ($scope.formData.dailyRate === null) {
+                $scope.resetCalculation();
+                return;
+            }
             IncomeCalculation.calculate(
                 {
                     dailyRate: $scope.formData.dailyRate,
@@ -26,7 +31,17 @@ angular.module('incomeCalculator', ['ngResource'])
                     $scope.formData.monthlyTax = data.monthlyTax
                     $scope.formData.additionalCost = data.additionalCost
                 });
-        }
+
+        };
+
+        $scope.resetCalculation = function () {
+            $scope.formData.monthlyRate = 0;
+            $scope.formData.monthlyTax = 0;
+            $scope.formData.additionalCost = 0;
+        };
+
+        $scope.resetCalculation();
+
     })
 
     .factory("Country", function ($resource) {
