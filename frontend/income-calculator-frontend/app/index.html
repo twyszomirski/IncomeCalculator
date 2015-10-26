@@ -32,7 +32,7 @@
     <form role="form" novalidate>
 
         <div class="choice-panel well">
-            <h3> 1. Wybierz kraj </h3>
+            <h4> 1. Wybierz kraj </h3>
 
             <div data-ng-repeat="country in countries">
                 <label>
@@ -42,7 +42,7 @@
 
                 </label>
             </div>
-            <h3>2. Wpisz stawk&#281; dzienn&#261;</h3>
+            <h4>2. Wpisz stawk&#281; dzienn&#261;</h3>
 
             <div class="input-group">
                 <input class="form-control" type="number" ng-model="formData.dailyRate" ng-model-options="{ debounce: 500 }" ng-change="updateCalculation()"
@@ -58,31 +58,31 @@
             <div>
                 <p>Stawka miesi&#281;czna netto</p>
 
-                <h1>{{formData.monthlyRate | number : 2}}
+                <h3>{{formData.monthlyRate | number : 2}}
                     <div class="inline" ng-hide="formData.monthlyRate == null">
                         PLN
                     </div>
-                </h1>
+                </h3>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <p>Podatek dochodowy ({{formData.selectedCountry.taxRate * 100}}%)</p>
 
-                    <h1>{{formData.monthlyTax | number : 2}}
+                    <h4>{{formData.monthlyTax | number : 2}}
                         <div class="inline" ng-hide="formData.monthlyTax == null">
                             PLN
                         </div>
-                    </h1>
+                    </h4>
                 </div>
 
                 <div class="col-md-6">
                     <p>Koszt Sta&#322;y</p>
 
-                    <h1>{{formData.additionalCost | number : 2}}
+                    <h4>{{formData.additionalCost | number : 2}}
                         <div class="inline" ng-hide="formData.additionalCost == null">
                             PLN
                         </div>
-                    </h1>
+                    </h4>
                 </div>
             </div>
 
