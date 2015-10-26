@@ -42,7 +42,7 @@ public class IncomeCalculationServiceImplTest {
 
         IncomeCalculationResponseDto result = service.calculateIncome(new BigDecimal("15.0"),"US");
 
-        assertThat(result.getMonthlyRate(),is(new BigDecimal("528.00")));
+        assertThat(result.getMonthlyRate(),is(new BigDecimal("508.00")));
         assertThat(result.getMonthlyTax(),is(new BigDecimal("132.00")));
         assertThat(result.getAdditionalCost(),is(new BigDecimal("20.00")));
     }

@@ -53,8 +53,8 @@ public class IncomeCalculationServiceImpl implements IncomeCalculationService {
         IncomeCalculationResponseDto result = new IncomeCalculationResponseDto();
         BigDecimal monthlyRateGross = NUMBER_OF_DAYS_IN_MONTH.multiply(dailyRate.multiply(exchangeRate));
         BigDecimal monthlyTax = monthlyRateGross.multiply(country.getTaxRate());
-        BigDecimal monthlyRateNet = monthlyRateGross.subtract(monthlyTax);
         BigDecimal additionalCost = country.getAdditionalCost().multiply(exchangeRate);
+        BigDecimal monthlyRateNet = monthlyRateGross.subtract(monthlyTax).subtract(additionalCost);
         result.setMonthlyRate(MathUtils.roundTwoPlaces(monthlyRateNet));
         result.setMonthlyTax(MathUtils.roundTwoPlaces(monthlyTax));
         result.setAdditionalCost(MathUtils.roundTwoPlaces(additionalCost));
