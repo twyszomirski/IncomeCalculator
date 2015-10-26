@@ -36,7 +36,7 @@ In order to start the web server with application deployed call:
 npm start
 ```
 
-Now browse to the app at `http://localhost:8000/app/index.html`.
+Now browse to the app at `http://localhost:8000/income-calculator/index.html`.
 
 #Running unit tests
 

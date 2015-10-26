@@ -4,10 +4,10 @@ module.exports = function(config){
     basePath : './',
 
     files : [
-      'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-resource/angular-resource.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/*.js'
+      'income-calculator/bower_components/angular/angular.js',
+      'income-calculator/bower_components/angular-resource/angular-resource.js',
+      'income-calculator/bower_components/angular-mocks/angular-mocks.js',
+      'income-calculator/*.js'
     ],
 
     autoWatch : true,
