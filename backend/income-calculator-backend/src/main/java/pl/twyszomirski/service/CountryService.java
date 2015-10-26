@@ -13,14 +13,14 @@ public interface CountryService {
 
     /**
      * Returns all countries present in the system
-     * @return
+     * @return list of countries
      */
     Iterable<Country> findAll();
 
     /**
      * Returns Country with matching countryCode or null if match wasn't find
-     * @param countryCode
-     * @return
+     * @param countryCode the code identifying  country
+     * @return found country or null
      */
     Country getByCountryCode(String countryCode);
 

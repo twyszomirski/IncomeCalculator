@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by Tomasz
+ * Dto for Yahoo Finance API
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RateDto {

@@ -14,5 +14,10 @@ import java.util.List;
  */
 public interface CountryRepository extends CrudRepository<Country, Long> {
 
+    /**
+     * Returns country with matching countryCode or null if match wasn't find
+     * @param countryCode the code identifying  country
+     * @return found country or null
+     */
     Country getByCountryCode(String countryCode);
 }

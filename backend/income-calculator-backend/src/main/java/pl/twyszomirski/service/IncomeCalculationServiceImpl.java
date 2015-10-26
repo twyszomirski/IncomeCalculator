@@ -13,6 +13,7 @@ import java.util.Date;
 
 /**
  * Created by Tomasz
+ * Implementation for pl.twyszomirski.service.IncomeCalculationService
  */
 @Service
 public class IncomeCalculationServiceImpl implements IncomeCalculationService {
@@ -35,6 +36,9 @@ public class IncomeCalculationServiceImpl implements IncomeCalculationService {
     @Autowired
     private CountryService countryService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IncomeCalculationResponseDto calculateIncome(BigDecimal dailyRate, String countryCode) throws NoExchangeRateException{
         LOGGER.trace("Calculating income for rate {} and country {}",dailyRate, countryCode);

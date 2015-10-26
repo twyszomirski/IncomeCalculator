@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 /**
  * Created by Tomasz
+ * Entity class representing country
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"countryCode"}))

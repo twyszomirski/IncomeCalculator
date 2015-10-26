@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * Created by Tomasz
- * The CORS filter. Adds headers allowing cross origin calls.
+ * For each request adds headers allowing cross origin calls.
  */
 @Component
 public class CorsFilter implements Filter {

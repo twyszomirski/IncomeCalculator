@@ -15,6 +15,7 @@ import java.util.Date;
 
 /**
  * Created by Tomasz
+ * Implementation for pl.twyszomirski.service.ExchangeRateService
  */
 @Service
 public class YahooExchangeRateServiceImpl implements ExchangeRateService{
@@ -37,6 +38,9 @@ public class YahooExchangeRateServiceImpl implements ExchangeRateService{
     private static final String EXCHANGE_RATE_SERVICE_URL = "http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.xchange where pair in (\"" + TO_CURRENCY_PLACE_HOLDER +
             FROM_CURRENCY_PLACE_HOLDER+ "\")&env=store://datatables.org/alltableswithkeys";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Cacheable("exchangeRates")
     public BigDecimal getCurrentExchangeRate(ExchangeRateToken exchangeRateToken) throws NoExchangeRateException{
