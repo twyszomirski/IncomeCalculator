@@ -42,7 +42,7 @@ angular.module('incomeCalculator', ['ngResource'])
          * the daily amount
          */
         $scope.updateCalculation = function () {
-            if ($scope.formData.dailyRate === null) {
+            if (!$scope.isDefined($scope.formData.dailyRate)) {
                 $scope.resetCalculation();
                 return;
             }
@@ -69,6 +69,13 @@ angular.module('incomeCalculator', ['ngResource'])
             $scope.formData.monthlyTax = 0;
             $scope.formData.additionalCost = 0;
         };
+		
+		/**
+		* Checks if a given value is defined
+		*/
+		$scope.isDefined = function(arg) {
+			return typeof (arg) !== 'undefined' && arg !== null;
+		};
 
         $scope.init();
         $scope.resetCalculation();
