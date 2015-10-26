@@ -9,6 +9,11 @@ import java.util.Date;
  */
 public interface ExchangeRateService {
 
+<<<<<<< Updated upstream
+    BigDecimal getExchangeRate(String fromCode, String ToCode, String dateIdentifier) throws NoExchangeRateException;
+
+    String getDateToken(Date date);
+=======
     /**
      * Provides an exchange rate for given value pair and a date.
      * The concrete implementation should use ExchangeRateToken to cache the
@@ -17,5 +22,6 @@ public interface ExchangeRateService {
      * @return
      * @throws NoExchangeRateException
      */
-    BigDecimal getCurrentExchangeRate(ExchangeRateToken exchangeRateToken) throws NoExchangeRateException;
+    Float getCurrentExchangeRate(ExchangeRateToken exchangeRateToken) throws NoExchangeRateException;
+>>>>>>> Stashed changes
 }

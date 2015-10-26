@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import pl.twyszomirski.domain.Country;
 import pl.twyszomirski.dto.IncomeCalculationResponseDto;
 import pl.twyszomirski.util.EntityUtils;
 
@@ -16,7 +15,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 /**
@@ -37,8 +35,14 @@ public class IncomeCalculationServiceImplTest {
     @Test
     public void testCalculateIncomeOK() throws Exception {
         when(countryService.getByCountryCode(anyString())).thenReturn(
+<<<<<<< Updated upstream
                 EntityUtils.buildCountry("US","USD", "USA", new BigDecimal("0.2"),new BigDecimal("10.0")));
-        when(exchangeRateService.getCurrentExchangeRate(new ExchangeRateToken("PLN","USD", new Date()))).thenReturn(new BigDecimal("2.0"));
+        when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
+        when(exchangeRateService.getExchangeRate("PLN","USD", "01012015")).thenReturn(new BigDecimal("2.0"));
+=======
+                EntityUtils.buildCountry("US","USD", "USA", 0.2f,10L));
+        when(exchangeRateService.getCurrentExchangeRate(new ExchangeRateToken("PLN","USD", new Date()))).thenReturn(2.0f);
+>>>>>>> Stashed changes
 
         IncomeCalculationResponseDto result = service.calculateIncome(new BigDecimal("15.0"),"US");
 
@@ -50,8 +54,14 @@ public class IncomeCalculationServiceImplTest {
     @Test(expected = NoExchangeRateException.class)
     public void testCalculateIncomePassesException() throws Exception {
         when(countryService.getByCountryCode(anyString())).thenReturn(
+<<<<<<< Updated upstream
                 EntityUtils.buildCountry("US","USD", "USA", new BigDecimal("0.19"),new BigDecimal("10.0")));
+        when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
+        when(exchangeRateService.getExchangeRate("PLN","USD", "01012015")).thenThrow(new NoExchangeRateException());
+=======
+                EntityUtils.buildCountry("US","USD", "USA", 0.19f,10L));
         when(exchangeRateService.getCurrentExchangeRate(new ExchangeRateToken("PLN","USD", new Date()))).thenThrow(new NoExchangeRateException());
+>>>>>>> Stashed changes
 
         service.calculateIncome(new BigDecimal("15.0"), "US");
     }
@@ -59,8 +69,14 @@ public class IncomeCalculationServiceImplTest {
     @Test(expected = NoExchangeRateException.class)
     public void testCalculateIncomeNullRate() throws Exception {
         when(countryService.getByCountryCode(anyString())).thenReturn(
+<<<<<<< Updated upstream
                 EntityUtils.buildCountry("US","USD", "USA", new BigDecimal("0.19"),new BigDecimal("10.0")));
-        when(exchangeRateService.getCurrentExchangeRate(new ExchangeRateToken("PLN","USD", new Date()))).thenReturn(null);
+        when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
+        when(exchangeRateService.getExchangeRate("PLN","USD", "01012015")).thenReturn(null);
+=======
+                EntityUtils.buildCountry("US","USD", "USA", 0.19f,10L));
+        when(exchangeRateService.getCurrentExchangeRate(new ExchangeRateToken("PLN","USD",new Date()))).thenReturn(null);
+>>>>>>> Stashed changes
 
         service.calculateIncome(new BigDecimal("15"), "US");
     }

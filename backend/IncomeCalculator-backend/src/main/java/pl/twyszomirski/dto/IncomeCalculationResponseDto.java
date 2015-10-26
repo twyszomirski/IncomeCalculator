@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * Created by Tomasz
+ * The Dto for income calculation responses
  */
 public class IncomeCalculationResponseDto {
 

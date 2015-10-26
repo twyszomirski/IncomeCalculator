@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * Created by Tomasz
+ * Application starting point
  */
 @SpringBootApplication
 @EnableCaching

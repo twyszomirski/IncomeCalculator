@@ -2,10 +2,7 @@ package pl.twyszomirski.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.twyszomirski.domain.Country;
 import pl.twyszomirski.dto.IncomeCalculationRequestDto;
 import pl.twyszomirski.dto.IncomeCalculationResponseDto;
@@ -14,6 +11,7 @@ import pl.twyszomirski.service.NoExchangeRateException;
 
 /**
  * Created by Tomasz
+ * Controller for income calculations
  */
 @RestController
 public class IncomeCalculationController {
@@ -23,7 +21,6 @@ public class IncomeCalculationController {
 
     @RequestMapping(value = "/incomeCalculations", method = RequestMethod.POST)
     IncomeCalculationResponseDto calculateIncome(@RequestBody @Validated IncomeCalculationRequestDto incomeCalculationDto) throws NoExchangeRateException {
-        //TODO: add error translation here
         return incomeCalculationService.calculateIncome(incomeCalculationDto.getDailyRate(),incomeCalculationDto.getCountryCode());
     }
 }

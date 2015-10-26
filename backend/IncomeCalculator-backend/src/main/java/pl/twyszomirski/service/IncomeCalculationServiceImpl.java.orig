@@ -19,10 +19,14 @@ public class IncomeCalculationServiceImpl implements IncomeCalculationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IncomeCalculationServiceImpl.class);
 
+<<<<<<< Updated upstream
+    private static final BigDecimal NUMBER_OF_DAYS_IN_MONTH = new BigDecimal("22");
+=======
     /**
      * Number of days in a month
      */
-    private static final BigDecimal NUMBER_OF_DAYS_IN_MONTH = new BigDecimal("22");
+    private static final int NUMBER_OF_DAYS_IN_MONTH = 22;
+>>>>>>> Stashed changes
 
     /**
      * Polish currency code
@@ -43,8 +47,13 @@ public class IncomeCalculationServiceImpl implements IncomeCalculationService {
             LOGGER.error("Error looking up country {}", countryCode);
             throw new IllegalArgumentException("Can't find country for code: " + countryCode);
         }
-	ExchangeRateToken exchangeRateToken = new ExchangeRateToken(CURRENCY_CODE_PL,country.getCurrencyCode(),new Date());
-        BigDecimal exchangeRate =  exchangeRateService.getCurrentExchangeRate(new ExchangeRateToken(CURRENCY_CODE_PL,country.getCurrencyCode(),new Date()));
+
+<<<<<<< Updated upstream
+        BigDecimal exchangeRate =  exchangeRateService.getExchangeRate(CURRENCY_CODE_PL,country.getCurrencyCode(),dateToken);
+=======
+        ExchangeRateToken exchangeRateToken = new ExchangeRateToken(CURRENCY_CODE_PL,country.getCurrencyCode(),new Date());
+        Float exchangeRate =  exchangeRateService.getCurrentExchangeRate(exchangeRateToken);
+>>>>>>> Stashed changes
         if(exchangeRate == null){
             //just to be on the safe side
             LOGGER.error("Exchange rate was null {}", exchangeRateToken);

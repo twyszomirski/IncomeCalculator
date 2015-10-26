@@ -39,7 +39,11 @@ public class YahooExchangeRateServiceImpl implements ExchangeRateService{
 
     @Override
     @Cacheable("exchangeRates")
-    public BigDecimal getCurrentExchangeRate(ExchangeRateToken exchangeRateToken) throws NoExchangeRateException{
+<<<<<<< Updated upstream
+    public BigDecimal getExchangeRate(String fromCode, String toCode, String dateIdentifier) throws NoExchangeRateException{
+=======
+    public Float getCurrentExchangeRate(ExchangeRateToken exchangeRateToken) throws NoExchangeRateException{
+>>>>>>> Stashed changes
 
         LOGGER.debug("Calling getCurrentExchangeRate with parameters {}",exchangeRateToken);
 
@@ -54,7 +58,7 @@ public class YahooExchangeRateServiceImpl implements ExchangeRateService{
         BigDecimal result = null;
         try {
             ResponseEntity<ExchangeRateDto> response = restTemplate.exchange(url, HttpMethod.GET, request, ExchangeRateDto.class);
-            result = new BigDecimal(Float.parseFloat(response.getBody().getQuery().getResults().getRate().getRate()));
+            result = BigDecimal.valueOf(Float.parseFloat(response.getBody().getQuery().getResults().getRate().getRate()));
         }
         catch(Exception e){
             LOGGER.error("The damn yahoo finance service failed",e);
@@ -62,5 +66,4 @@ public class YahooExchangeRateServiceImpl implements ExchangeRateService{
         }
         return result;
     }
-
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by Tomasz
+ * Repository for managing countries
  */
 public interface CountryRepository extends CrudRepository<Country, Long> {
 

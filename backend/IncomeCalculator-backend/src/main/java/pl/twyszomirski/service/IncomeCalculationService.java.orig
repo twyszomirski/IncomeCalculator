@@ -10,6 +10,9 @@ import java.math.BigDecimal;
  */
 public interface IncomeCalculationService {
 
+<<<<<<< Updated upstream
+    IncomeCalculationResponseDto calculateIncome(BigDecimal dailyRate, String countryCode) throws NoExchangeRateException;
+=======
     /**
      * Calculates the monthly income in given currency and for a given daily rate.
      * @param dailyRate
@@ -17,5 +20,6 @@ public interface IncomeCalculationService {
      * @return
      * @throws NoExchangeRateException
      */
-    IncomeCalculationResponseDto calculateIncome(BigDecimal dailyRate, String countryCode) throws NoExchangeRateException;
+    IncomeCalculationResponseDto calculateIncome(Float dailyRate, String countryCode) throws NoExchangeRateException;
+>>>>>>> Stashed changes
 }
