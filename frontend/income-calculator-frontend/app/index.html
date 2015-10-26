@@ -45,7 +45,7 @@
             <h3>2. Wpisz stawk&#281; dzienn&#261;</h3>
 
             <div class="input-group">
-                <input class="form-control" type="number" ng-model="formData.dailyRate" ng-change="updateCalculation()"
+                <input class="form-control" type="number" ng-model="formData.dailyRate" ng-model-options="{ debounce: 500 }" ng-change="updateCalculation()"
                        placeholder="Kwota netto"/>
 
                 <div class="input-group-addon">{{formData.selectedCountry.currencyCode}}</div>
