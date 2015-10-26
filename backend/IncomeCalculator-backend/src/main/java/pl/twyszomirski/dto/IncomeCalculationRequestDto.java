@@ -1,6 +1,7 @@
 package pl.twyszomirski.dto;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * Created by Tomasz
@@ -8,15 +9,15 @@ import javax.validation.constraints.NotNull;
 public class IncomeCalculationRequestDto {
 
     @NotNull
-    Float dailyRate;
+    BigDecimal dailyRate;
     @NotNull
     String countryCode;
 
-    public Float getDailyRate() {
+    public BigDecimal getDailyRate() {
         return dailyRate;
     }
 
-    public void setDailyRate(Float dailyRate) {
+    public void setDailyRate(BigDecimal dailyRate) {
         this.dailyRate = dailyRate;
     }
 

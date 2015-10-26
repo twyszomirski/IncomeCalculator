@@ -1,35 +1,37 @@
 package pl.twyszomirski.dto;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Tomasz
  */
 public class IncomeCalculationResponseDto {
 
-    Float monthlyRate;
-    Float monthlyTax;
-    Float additionalCost;
+    BigDecimal monthlyRate;
+    BigDecimal monthlyTax;
+    BigDecimal additionalCost;
 
-    public Float getMonthlyRate() {
+    public BigDecimal getMonthlyRate() {
         return monthlyRate;
     }
 
-    public void setMonthlyRate(Float monthlyRate) {
+    public void setMonthlyRate(BigDecimal monthlyRate) {
         this.monthlyRate = monthlyRate;
     }
 
-    public Float getMonthlyTax() {
+    public BigDecimal getMonthlyTax() {
         return monthlyTax;
     }
 
-    public void setMonthlyTax(Float monthlyTax) {
+    public void setMonthlyTax(BigDecimal monthlyTax) {
         this.monthlyTax = monthlyTax;
     }
 
-    public Float getAdditionalCost() {
+    public BigDecimal getAdditionalCost() {
         return additionalCost;
     }
 
-    public void setAdditionalCost(Float additionalCost) {
+    public void setAdditionalCost(BigDecimal additionalCost) {
         this.additionalCost = additionalCost;
     }
 

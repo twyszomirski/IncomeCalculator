@@ -9,6 +9,7 @@ import pl.twyszomirski.domain.Country;
 import pl.twyszomirski.dto.IncomeCalculationResponseDto;
 import pl.twyszomirski.util.EntityUtils;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -36,39 +37,39 @@ public class IncomeCalculationServiceImplTest {
     @Test
     public void testCalculateIncomeOK() throws Exception {
         when(countryService.getByCountryCode(anyString())).thenReturn(
-                EntityUtils.buildCountry("US","USD", "USA", 0.2f,10L));
+                EntityUtils.buildCountry("US","USD", "USA", new BigDecimal("0.2"),new BigDecimal("10.0")));
         when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
-        when(exchangeRateService.getExchangeRate("PLN","USD", "01012015")).thenReturn(2.0f);
+        when(exchangeRateService.getExchangeRate("PLN","USD", "01012015")).thenReturn(new BigDecimal("2.0"));
 
-        IncomeCalculationResponseDto result = service.calculateIncome(15f,"US");
+        IncomeCalculationResponseDto result = service.calculateIncome(new BigDecimal("15.0"),"US");
 
-        assertThat(result.getMonthlyRate(),is(528f));
-        assertThat(result.getMonthlyTax(),is(132f));
-        assertThat(result.getAdditionalCost(),is(20f));
+        assertThat(result.getMonthlyRate(),is(new BigDecimal("528.00")));
+        assertThat(result.getMonthlyTax(),is(new BigDecimal("132.00")));
+        assertThat(result.getAdditionalCost(),is(new BigDecimal("20.00")));
     }
 
     @Test(expected = NoExchangeRateException.class)
     public void testCalculateIncomePassesException() throws Exception {
         when(countryService.getByCountryCode(anyString())).thenReturn(
-                EntityUtils.buildCountry("US","USD", "USA", 0.19f,10L));
+                EntityUtils.buildCountry("US","USD", "USA", new BigDecimal("0.19"),new BigDecimal("10.0")));
         when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
         when(exchangeRateService.getExchangeRate("PLN","USD", "01012015")).thenThrow(new NoExchangeRateException());
 
-        service.calculateIncome(15f, "US");
+        service.calculateIncome(new BigDecimal("15.0"), "US");
     }
 
     @Test(expected = NoExchangeRateException.class)
     public void testCalculateIncomeNullRate() throws Exception {
         when(countryService.getByCountryCode(anyString())).thenReturn(
-                EntityUtils.buildCountry("US","USD", "USA", 0.19f,10L));
+                EntityUtils.buildCountry("US","USD", "USA", new BigDecimal("0.19"),new BigDecimal("10.0")));
         when(exchangeRateService.getDateToken(any(Date.class))).thenReturn("01012015");
         when(exchangeRateService.getExchangeRate("PLN","USD", "01012015")).thenReturn(null);
 
-        service.calculateIncome(15f, "US");
+        service.calculateIncome(new BigDecimal("15"), "US");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCalculateIncomeNullCountry() throws Exception {
-        service.calculateIncome(15f, "US");
+        service.calculateIncome(new BigDecimal("15"), "US");
     }
 }

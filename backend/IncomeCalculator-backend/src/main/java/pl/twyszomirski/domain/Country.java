@@ -2,6 +2,7 @@ package pl.twyszomirski.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * Created by Tomasz
@@ -25,10 +26,10 @@ public class Country {
     private String currencyCode;
 
     @NotNull
-    private Float taxRate;
+    private BigDecimal taxRate;
 
     @NotNull
-    private Long additionalCost;
+    private BigDecimal additionalCost;
 
 
     public long getId() {
@@ -55,19 +56,19 @@ public class Country {
         this.currencyCode = currencyCode;
     }
 
-    public Float getTaxRate() {
+    public BigDecimal getTaxRate() {
         return taxRate;
     }
 
-    public void setTaxRate(Float taxRate) {
+    public void setTaxRate(BigDecimal taxRate) {
         this.taxRate = taxRate;
     }
 
-    public Long getAdditionalCost() {
+    public BigDecimal getAdditionalCost() {
         return additionalCost;
     }
 
-    public void setAdditionalCost(Long additionalCost) {
+    public void setAdditionalCost(BigDecimal additionalCost) {
         this.additionalCost = additionalCost;
     }
 

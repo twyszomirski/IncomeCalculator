@@ -18,6 +18,7 @@ import pl.twyszomirski.service.CountryService;
 import pl.twyszomirski.util.EntityUtils;
 import pl.twyszomirski.util.TestUtils;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -53,8 +54,8 @@ public class CountryControllerTest {
 
     @Test
     public void testFindAllCountries() throws Exception {
-        Country countryA = EntityUtils.buildCountry("US","USD", "USA", 0.01f,0L);
-        Country countryB = EntityUtils.buildCountry("PL","PLN", "Poland", 0.19f,10L);
+        Country countryA = EntityUtils.buildCountry("US","USD", "USA", new BigDecimal("0.01"),new BigDecimal("0"));
+        Country countryB = EntityUtils.buildCountry("PL","PLN", "Poland", new BigDecimal("0.19"),new BigDecimal("10.0"));
 
         when(countryService.findAll()).thenReturn(Arrays.asList(countryA, countryB));
 
@@ -70,6 +71,6 @@ public class CountryControllerTest {
                 .andExpect( jsonPath("$[1].currencyCode", is("PLN")))
                 .andExpect( jsonPath("$[1].name", is("Poland")))
                 .andExpect( jsonPath("$[1].taxRate", is(0.19)))
-                .andExpect( jsonPath("$[1].additionalCost", is(10)));
+                .andExpect( jsonPath("$[1].additionalCost", is(10.0)));
     }
 }

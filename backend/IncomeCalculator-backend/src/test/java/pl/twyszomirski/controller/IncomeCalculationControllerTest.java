@@ -18,6 +18,8 @@ import pl.twyszomirski.dto.IncomeCalculationResponseDto;
 import pl.twyszomirski.service.IncomeCalculationService;
 import pl.twyszomirski.util.TestUtils;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -50,14 +52,14 @@ public class IncomeCalculationControllerTest {
     @Test
     public void testCalculateIncome() throws Exception {
         IncomeCalculationRequestDto incomeCalculationRequestDtoPL = new IncomeCalculationRequestDto();
-        incomeCalculationRequestDtoPL.setDailyRate(1.0f);
+        incomeCalculationRequestDtoPL.setDailyRate(new BigDecimal("1.0"));
         incomeCalculationRequestDtoPL.setCountryCode("PL");
 
         IncomeCalculationResponseDto incomeCalculationResponseDtoPL = new IncomeCalculationResponseDto();
-        incomeCalculationResponseDtoPL.setAdditionalCost(11f);
-        incomeCalculationResponseDtoPL.setMonthlyRate(19f);
-        incomeCalculationResponseDtoPL.setMonthlyTax(15.5f);
-        when(incomeCalculationService.calculateIncome(1.0f, "PL")).thenReturn(incomeCalculationResponseDtoPL);
+        incomeCalculationResponseDtoPL.setAdditionalCost(new BigDecimal("11.0"));
+        incomeCalculationResponseDtoPL.setMonthlyRate(new BigDecimal("19.0"));
+        incomeCalculationResponseDtoPL.setMonthlyTax(new BigDecimal("15.5"));
+        when(incomeCalculationService.calculateIncome(new BigDecimal("1.0"), "PL")).thenReturn(incomeCalculationResponseDtoPL);
 
         mockMvc.perform(post("/incomeCalculations").content(TestUtils.asJsonString(incomeCalculationRequestDtoPL))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -67,14 +69,14 @@ public class IncomeCalculationControllerTest {
                 .andExpect( jsonPath("$.monthlyTax", is(15.5)));
 
         IncomeCalculationRequestDto incomeCalculationRequestDtoDE = new IncomeCalculationRequestDto();
-        incomeCalculationRequestDtoDE.setDailyRate(2.0f);
+        incomeCalculationRequestDtoDE.setDailyRate(BigDecimal.valueOf(2.0f));
         incomeCalculationRequestDtoDE.setCountryCode("DE");
 
         IncomeCalculationResponseDto incomeCalculationResponseDtoDE = new IncomeCalculationResponseDto();
-        incomeCalculationResponseDtoDE.setAdditionalCost(111f);
-        incomeCalculationResponseDtoDE.setMonthlyRate(119f);
-        incomeCalculationResponseDtoDE.setMonthlyTax(115.5f);
-        when(incomeCalculationService.calculateIncome(2.0f, "DE")).thenReturn(incomeCalculationResponseDtoDE);
+        incomeCalculationResponseDtoDE.setAdditionalCost(new BigDecimal("111.0"));
+        incomeCalculationResponseDtoDE.setMonthlyRate(new BigDecimal("119.0"));
+        incomeCalculationResponseDtoDE.setMonthlyTax(new BigDecimal("115.5"));
+        when(incomeCalculationService.calculateIncome(new BigDecimal("2.0"), "DE")).thenReturn(incomeCalculationResponseDtoDE);
 
         mockMvc.perform(post("/incomeCalculations").content(TestUtils.asJsonString(incomeCalculationRequestDtoDE))
                 .contentType(MediaType.APPLICATION_JSON)
