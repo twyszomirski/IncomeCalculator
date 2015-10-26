@@ -7,15 +7,40 @@ angular.module('incomeCalculator', ['ngResource'])
     }])
 
     .controller('CalculationCtrl', function ($scope, Country, IncomeCalculation) {
-        $scope.formData = {};
 
-        Country.query(function (data) {
-            $scope.countries = data;
-            if ($scope.countries.length > 0) {
-                $scope.formData.selectedCountry = $scope.countries[0];
-            }
-        });
+        /**
+         * Handles error situation when talking to backend
+         */
+		$scope.handleError = function(){
+			$scope.error = true;
+		}
 
+        /**
+         * Resets the error indcator
+         */
+        $scope.resetError = function(){
+			$scope.error = false;
+		}
+
+        /**
+         * Initializes the view (fetches the list of countries)
+         */
+        $scope.init = function () {
+            $scope.formData = {};
+            Country.query(function (data) {
+                $scope.resetError();
+                $scope.countries = data;
+                if ($scope.countries.length > 0) {
+                    $scope.formData.selectedCountry = $scope.countries[0];
+                    $scope.initialized = true;
+                }
+            }, $scope.handleError);
+        }
+
+        /**
+         * Updates the result calculation after user changes the country or
+         * the daily amount
+         */
         $scope.updateCalculation = function () {
             if ($scope.formData.dailyRate === null) {
                 $scope.resetCalculation();
@@ -28,19 +53,24 @@ angular.module('incomeCalculator', ['ngResource'])
                     country_code: $scope.formData.selectedCountry.countryCode
                 },
                 function (data) {
-                    $scope.formData.monthlyRate = data.monthlyRate
+                    $scope.resetError();
+					$scope.formData.monthlyRate = data.monthlyRate
                     $scope.formData.monthlyTax = data.monthlyTax
                     $scope.formData.additionalCost = data.additionalCost
-                });
+                }, $scope.handleError);
 
         };
 
+        /**
+         * Set the result fields to initial value (zeros)
+         */
         $scope.resetCalculation = function () {
             $scope.formData.monthlyRate = 0;
             $scope.formData.monthlyTax = 0;
             $scope.formData.additionalCost = 0;
         };
 
+        $scope.init();
         $scope.resetCalculation();
 
     })
