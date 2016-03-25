@@ -1,0 +1,17 @@
+.main-content {
+    margin: 0 auto;
+    max-width: 450px;
+    padding: 15px;
+}
+
+div .inline {
+    display: inline;
+}
+
+body {
+    background-color: lightgray;
+}
+
+div.choice-panel {
+    background-color: white;
+}

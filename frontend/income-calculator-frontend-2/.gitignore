@@ -1,0 +1,10 @@
+.idea
+*.iml
+logs/*
+!.gitkeep
+node_modules/
+tmp
+.DS_Store
+*.js
+*.js.map
+

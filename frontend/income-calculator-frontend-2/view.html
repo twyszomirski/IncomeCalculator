@@ -1,0 +1,65 @@
+<div class="container main-content">
+    <h1>PRZELICZNIK KONTRAKTORA</h1>
+
+    <p> Aplikacja ma za zadanie wyliczy&#263; miesi&#281;czny zarobek netto w PLN na kontrakcie w Niemczech,
+        Wielkiej
+        Brytanii i Polsce</p>
+
+    <form role="form" novalidate>
+
+        <div class="choice-panel well">
+            <h3> 1. Wybierz kraj </h3>
+
+            <div *ngFor="#country of countries">
+                <label> <input [checked]="country === selectedCountry" (click)="onSelect(country)" type="radio"
+                               name="country"/> {{country.name}} </label>
+            </div>
+        </div>
+
+        <h4>2. Wpisz stawk&#281; dzienn&#261;</h4>
+
+        <div class="input-group">
+            <input class="form-control" type="number" #dailyRate (keyup)="doCalc(dailyRate.value)"
+                   placeholder="Kwota netto"/>
+
+            <div class="input-group-addon">{{selectedCountry.currencyCode}}</div>
+        </div>
+
+
+        <div class="result-panel well text-center">
+            <h1> WYNIK </h1>
+
+            <div>
+                <p>Stawka miesi&#281;czna netto</p>
+
+                <h3>{{monthlyRate | number : '.2'}}
+                    <div class="inline">
+                        PLN
+                    </div>
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Podatek dochodowy ({{selectedCountry.taxRate * 100}}%)</p>
+
+                    <h4>{{monthlyTax | number : '.2'}}
+                        <div class="inline">
+                            PLN
+                        </div>
+                    </h4>
+                </div>
+
+                <div class="col-md-6">
+                    <p>Koszt Sta&#322;y</p>
+
+                    <h4>{{additionalCost | number : '.2'}}
+                        <div class="inline">
+                            PLN
+                        </div>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+	
