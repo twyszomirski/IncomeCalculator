@@ -1,4 +1,4 @@
-import{Country}from'./country';
+import {Country} from'./country';
 import {Component, OnInit}from 'angular2/core';
 import {HTTP_PROVIDERS}from 'angular2/http';
 import {CountryService}from './country.service';
@@ -28,13 +28,13 @@ export class AppComponent implements OnInit{
 	additionalCost :number;
 	
 	ngOnInit() {
-		this.selectedCountry = {};
+		this.selectedCountry = new Country();
 		this.monthlyRate = 0;
 		this.monthlyTax = 0;
 		this.additionalCost = 0;
 		this._countryService.getCountries()
 			.subscribe(
-				countries => (this.countries = countries, this.selectedCountry = this.countries[0],
+				countries => (this.countries = countries, this.selectedCountry = this.countries[0]),
 				error =>  console.log('error'));
 }
 

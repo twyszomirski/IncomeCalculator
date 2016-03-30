@@ -12,9 +12,9 @@ export class IncomeCalculationService {
 
   getCalculation (dailyRate: number, countryCode: string) {
     var params = new URLSearchParams();
-    params.set('daily_rate', dailyRate); 
+    params.set('daily_rate', dailyRate.toString()); 
     params.set('country_code', countryCode);
-    return this.http.get(this._incomeCalculationUrl,{search: params}).map(res => <IncomeCalculation[]> res.json())
+    return this.http.get(this._incomeCalculationUrl,{search: params}).map(res => <IncomeCalculation> res.json())
     .catch(this.handleError);
   }
   
