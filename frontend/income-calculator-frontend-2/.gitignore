@@ -7,4 +7,5 @@ tmp
 .DS_Store
 *.js
 *.js.map
+!karma*.js
 
