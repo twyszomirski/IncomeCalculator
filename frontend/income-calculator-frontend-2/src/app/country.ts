@@ -1,6 +1,7 @@
 export class Country {
-  id: number;
-  name: string;
-  currencyCode: string;
-  countryCode: string;
+
+    id: number;
+    name: string;
+    currencyCode: string;
+    countryCode: string;
 }

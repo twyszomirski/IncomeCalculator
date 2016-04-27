@@ -46,7 +46,7 @@ System.import('angular2/testing').then(function(testing) {
 .then(function() {
   __karma__.start();
 }, function(error) {
-  __karma__.error(error.stack || error);
+  __karma__.error(""+(error.stack || error));
 });
 
 

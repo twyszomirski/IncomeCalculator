@@ -8,7 +8,7 @@
     "http-server": "http-server -p 9090 -c-1",
     "typings": "typings",
     "postinstall": "typings install --ambient",
-    "test": "karma start karma.conf.js" 
+    "test": "concurrently \"npm run tsc:w\" \"karma start karma.conf.js\" " 
   },
   "license": "ISC",
   "dependencies": {
@@ -31,6 +31,7 @@
     "karma-chrome-launcher": "^0.2.1",
     "karma-cli": "^0.0.4",
     "karma-jasmine": "^0.3.6",
+    "karma-junit-reporter": "^0.4.0",
     "rimraf": "^2.4.3"
   }
 }

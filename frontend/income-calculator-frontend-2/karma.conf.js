@@ -14,6 +14,7 @@ module.exports = function(config) {
       {pattern: 'node_modules/rxjs/bundles/Rx.js', included: true, watched: true},
       {pattern: 'node_modules/angular2/bundles/angular2.js', included: true, watched: true},
       {pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true},
+      {pattern: 'node_modules/angular2/bundles/http.dev.js', included: true, watched: true},
 
       {pattern: 'karma-test-shim.js', included: true, watched: true},
 
@@ -36,7 +37,13 @@ module.exports = function(config) {
       "/app/": "/base/src/app/"
     },
 
-    reporters: ['progress'],
+    plugins : [
+    'karma-chrome-launcher',
+    'karma-jasmine',
+            'karma-junit-reporter'
+            ],
+
+    reporters: ['progress', 'junit'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

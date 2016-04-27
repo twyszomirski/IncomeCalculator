@@ -1,4 +1,4 @@
 export interface IncomeCalculation {
-  monthlyRate: number;
-  monthlyTax: number;
+    monthlyRate: number;
+    monthlyTax: number;
 }
